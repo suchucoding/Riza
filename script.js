@@ -1,6 +1,8 @@
 let btn = document.querySelector("#btn");
 let content = document.querySelector("#content");
-let voice= document.querySelector("#voice");
+let voice = document.querySelector("#voice");
+let userInput = document.querySelector("#user-input");
+let sendBtn = document.querySelector("#send-btn");
 
 function speak(text) {
     let text_speak = new SpeechSynthesisUtterance(text);
@@ -39,16 +41,24 @@ rec.onresult = (event) => {
 
 btn.addEventListener("click", () => {
     rec.start();
-    btn.style.display="none";
-    voice.style.display="block";
+    btn.style.display = "none";
+    voice.style.display = "block";
+});
+
+sendBtn.addEventListener("click", () => {
+    let message = userInput.value.toLowerCase();
+    content.innerText = message;
+    takeCommand(message);
+    userInput.value = "";
 });
 
 function takeCommand(message) {
-    btn.style.display="flex";
-    voice.style.display="none";
-    if (message.includes("hello") || message.includes("hey") || message.includes("namaste")) {
-        speak("Hello sir, what can I help you with?");
-    } else if (message.includes("who are you")) {
+    btn.style.display = "flex";
+    voice.style.display = "none";
+    if (message.includes("hello") || message.includes("hey") || message.includes("namaste") || 
+    message.includes("hii") ) {
+        speak("Hello sir / mam, what can I help you with?");
+    } else if (message.includes("who are you") ||  message.includes("what is your name")) {
         speak("Hi, I'm Riza, a virtual assistant created by Miss Suchanda Roy.");
     } else if (message.includes("how are you")) {
         speak("I'm fine, how are you?");
@@ -64,16 +74,8 @@ function takeCommand(message) {
     } else if (message.includes("open instagram")) {
         speak("Alright, opening Instagram...");
         window.open("https://www.instagram.com/", "_blank");
-    }else if (message.includes("open calculator")) {
-        speak("Alright, opening calculator...");
-        window.open("calculator://");
-    }else if (message.includes("open whatsapp")) {
-        speak("Alright, opening whatsapp");
-        window.open("whatsapp://");
-    }
-    else {
-        speak(`This is what I found on the internet regarding ${message.replace("Riza","")||message.replace("Lisa","")}`);
+    } else {
+        speak(`This is what I found on the internet regarding ${message}`);
         window.open(`https://www.google.com/search?q=${message}`);
-
     }
 }

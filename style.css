@@ -8,17 +8,19 @@
 body{
     width: 100%;
     height: 100%;
-    background-color: black;
+    background: url('https://i.pinimg.com/originals/f9/a8/ed/f9a8ed161524ca06e0d5250fe2d33e51.gif') no-repeat center center fixed;
+     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
     flex-direction: column;
 }
-#logo{
-    width: 20vw;
-    margin-top: 20vh;
-
+#logo { width: 20vw;
+     margin-top: 20vh;
+     animation: logoPulse 2s infinite; 
+    filter: drop-shadow(0 0 20px #4988F5);
+    border-radius: 30%;
 }
 h1{
     color: white;
@@ -56,3 +58,28 @@ h1{
     box-shadow: 2px 2px 20px rgb(32, 185, 236), 2px 2px 20px rgb(0, 16, 189) ;
     letter-spacing: 1px;
 }
+#user-input { width: 70%;
+     padding: 10px; 
+     border-radius: 20px; 
+     border: none; 
+     font-size: 18px; 
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    }
+    #send-btn { padding: 10px 20px; 
+        background: linear-gradient(45deg, #20B9EC, #0010BD); 
+        border: none; 
+        border-radius: 20px; 
+        color: white; 
+        font-size: 18px; 
+        cursor: pointer; 
+        transition: all 0.3s; 
+    }
+    #send-btn:hover { 
+        box-shadow: 0 5px 15px rgba(32, 185, 236, 0.8), 
+        0 5px 15px rgba(0, 16, 189, 0.8); 
+        transform: translateY(-3px); } 
+    @keyframes fadeIn { 
+        from { opacity: 0; } 
+        to { opacity: 1; } 
+    }
+
