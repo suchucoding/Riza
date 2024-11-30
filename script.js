@@ -55,8 +55,9 @@ sendBtn.addEventListener("click", () => {
 function takeCommand(message) {
     btn.style.display = "flex";
     voice.style.display = "none";
+    message = message.replace(/h[i]+/g, "hi");
     if (message.includes("hello") || message.includes("hey") || message.includes("namaste") || 
-    message.includes("hii") ) {
+    message.includes("hi") ) {
         speak("Hello sir / mam, what can I help you with?");
     } else if (message.includes("who are you") ||  message.includes("what is your name")) {
         speak("Hi, I'm Riza, a virtual assistant created by Miss Suchanda Roy.");
