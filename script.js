@@ -4,6 +4,19 @@ let voice = document.querySelector("#voice");
 let userInput = document.querySelector("#user-input");
 let sendBtn = document.querySelector("#send-btn");
 
+const faq = {
+    "what is your name": "I am Riza, your virtual assistant.",
+    "who created you": "I was created by Miss Suchanda Roy.",
+    "how are you": "I'm just a program, but I'm here to help you!",
+    "what is the capital of India": "The capital of India is New Delhi.",
+    "tell me a joke": "Why don't scientists trust atoms? Because they make up everything!",
+    "i love you ": "Thank you thats very sweet !, As Iam a AI assistant , I don't feel same way as humans do, but im happy to be here to help a sweet human like you ! ",
+    "i like you": "I am happy that i made you like me , thank you sweety",
+    "i hate you": "I'm sorry to hear that you are upset with me", 
+    
+    // Add more FAQs here
+};
+
 function speak(text) {
     let text_speak = new SpeechSynthesisUtterance(text);
     text_speak.pitch = 1;
@@ -56,6 +69,9 @@ function takeCommand(message) {
     btn.style.display = "flex";
     voice.style.display = "none";
     message = message.replace(/h[i]+/g, "hi");
+    if (answer){ 
+        speak(answer); content.innerText = answer;
+    }else{
     if (message.includes("hello") || message.includes("hey") || message.includes("namaste") || 
     message.includes("hi") ) {
         speak("Hello sir / mam, what can I help you with?");
@@ -79,4 +95,5 @@ function takeCommand(message) {
         speak(`This is what I found on the internet regarding ${message}`);
         window.open(`https://www.google.com/search?q=${message}`);
     }
+}
 }
