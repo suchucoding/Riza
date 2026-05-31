@@ -14,10 +14,6 @@ const faq = {
     "i love you": "Thank you, that’s very sweet! As I am an AI assistant, I don't feel the same way as humans do, but I'm happy to be here to help a sweet human like you!",
     "i like you": "I am happy that I made you like me, thank you sweety.",
     "i hate you": "I'm sorry to hear that you are upset with me"
-    "motivate me": "You are capable of amazing things. Keep pushing forward, success is waiting for you!",
-    "good morning": "Good morning! I hope your day is full of positivity and success.",
-    "good night": "Good night! Sleep well and recharge for tomorrow.",
-    "thank you": "You're welcome! I'm always here to help."
 };
 
 function speak(text) {
@@ -105,7 +101,7 @@ function takeCommand(message) {
 
     if (message.includes("hello") || message.includes("hey") || message.includes("namaste") || message.includes("hi")) {
         speak("Hello sir / mam, what can I help you with?");
-    } else if (message.includes("who are you") || message.includes("what is your name")) {
+    } else if (message.includes("who are you") || message.includes("what is your name") || message.includes("what's your name"))  {
         speak("Hi, I'm Riza, a virtual assistant created by Miss Suchanda Roy.");
     } else if (message.includes("how are you")) {
         speak("I'm fine, how are you?");
