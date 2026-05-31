@@ -16,52 +16,45 @@ const faq = {
 };
 
 function speak(text) {
-    let text_speak = new SpeechSynthesisUtterance(text);
-    text_speak.pitch = 1;
-    text_speak.rate = 1;
-    text_speak.volume = 1;
-    text_speak.lang = 'en-US';
+    let utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.pitch = 1;
+    utterance.rate = 1;
 
     let voices = window.speechSynthesis.getVoices();
     if (voices.length > 0) {
-        // Pick first female-like voice available
-        let femaleVoice = voices.find(v => v.name.includes("Google") || v.name.includes("Samantha") || v.name.includes("Zira"));
-        if (femaleVoice) text_speak.voice = femaleVoice;
+        let englishVoice = voices.find(v => v.lang.startsWith("en"));
+        if (englishVoice) utterance.voice = englishVoice;
     }
 
-    window.speechSynthesis.speak(text_speak);
+    window.speechSynthesis.speak(utterance);
 }
 
-// Ensure voices are loaded
 window.speechSynthesis.onvoiceschanged = () => {
     console.log("Voices loaded:", window.speechSynthesis.getVoices());
 };
 
 function wishMe() {
     let hours = new Date().getHours();
-    if (hours < 12) {
-        speak("Good Morning My Friend");
-    } else if (hours < 16) {
-        speak("Good Afternoon My Friend");
-    } else {
-        speak("Good Evening My Friend");
-    }
+    if (hours < 12) speak("Good Morning My Friend");
+    else if (hours < 16) speak("Good Afternoon My Friend");
+    else speak("Good Evening My Friend");
 }
 
-// Only greet after user taps a button (mobile restriction)
-btn.addEventListener("click", () => {
-    wishMe();
-    startRecognition();
-});
-
-let speechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-let rec = speechRec ? new speechRec() : null;
+// ✅ Force Android to use webkitSpeechRecognition
+let rec;
+if ('webkitSpeechRecognition' in window) {
+    rec = new webkitSpeechRecognition();
+    rec.continuous = false;   // stop after one phrase
+    rec.interimResults = false;
+    rec.lang = 'en-US';
+} else {
+    rec = null;
+    speak("Sorry, speech recognition is not supported on this device. Please type instead.");
+}
 
 function startRecognition() {
-    if (!rec) {
-        speak("Sorry, speech recognition is not supported on this device. Please type instead.");
-        return;
-    }
+    if (!rec) return;
     rec.start();
     btn.style.display = "none";
     voice.style.display = "block";
@@ -69,11 +62,21 @@ function startRecognition() {
 
 if (rec) {
     rec.onresult = (event) => {
-        let transcript = event.results[event.resultIndex][0].transcript;
+        let transcript = event.results[0][0].transcript;
         content.innerText = transcript;
         takeCommand(transcript.toLowerCase());
     };
+
+    rec.onerror = (err) => {
+        console.error("Recognition error:", err);
+        speak("I couldn't hear you properly, please try again.");
+    };
 }
+
+btn.addEventListener("click", () => {
+    wishMe();
+    startRecognition();
+});
 
 sendBtn.addEventListener("click", () => {
     let message = userInput.value.toLowerCase();
