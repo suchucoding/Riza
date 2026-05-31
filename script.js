@@ -10,9 +10,25 @@ const faq = {
     "how are you": "I'm just a program, but I'm here to help you!",
     "what is the capital of india": "The capital of India is New Delhi.",
     "tell me a joke": "Why don't scientists trust atoms? Because they make up everything!",
-    "i love you": "Thank you, that’s very sweet! As I am an AI assistant, I don't feel the same way as humans do, but I'm happy to be here to help a sweet human like you!",
-    "i like you": "I am happy that I made you like me, thank you sweety.",
-    "i hate you": "I'm sorry to hear that you are upset with me"
+    "i love you": "Thank you, that's very sweet! As an AI assistant, I don't feel the same way as humans do, but I'm glad to help you!",
+    "i like you": "I'm happy that I made you like me, thank you!",
+    "i hate you": "I'm sorry to hear that you are upset with me.",
+    "what is the time": `The current time is ${new Date().toLocaleTimeString()}.`,
+    "what is the date": `Today's date is ${new Date().toLocaleDateString()}.`,
+    "open youtube": "Alright, opening YouTube...",
+    "open google": "Alright, opening Google...",
+    "open facebook": "Alright, opening Facebook...",
+    "open instagram": "Alright, opening Instagram...",
+    "who is the prime minister of india": "The Prime Minister of India is Narendra Modi.",
+    "who is the president of usa": "The President of the United States is Donald Trump.",
+    "what is your purpose": "My purpose is to assist you with tasks, answer questions, and make life easier!",
+    "sing a song": "La la la... I'm singing a digital tune for you!",
+    "motivate me": "You are stronger than you think. Keep pushing forward, success is waiting for you!",
+    "good morning": "Good morning! I hope you have a wonderful day ahead.",
+    "good night": "Good night! Sweet dreams and rest well.",
+    "thank you": "You're welcome! I'm always here to help.",
+    "who am i": "You are my user, and I’m here to assist you!"
+
 };
 
 function speak(text) {
